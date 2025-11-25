@@ -1,0 +1,123 @@
+/* Dashboard.css */
+.dashboard {
+display: flex;
+min-height: 100vh;
+height: auto;
+font-family: Arial, sans-serif;
+}
+
+.sidebar {
+width: 220px;
+background-color: #1f1f1f;
+color: #fff;
+padding: 20px;
+box-sizing: border-box;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+.logo {
+font-size: 1.5rem;
+margin-bottom: 2rem;
+text-align: center;
+}
+
+.sidebar ul {
+list-style: none;
+padding: 0;
+margin: 0;
+flex-grow: 1;
+}
+
+.sidebar li {
+margin-bottom: 10px;
+border-radius: 5px;
+transition: background 0.2s;
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+background-color: #007bff;
+}
+
+.menu-link {
+display: flex;
+align-items: center;
+text-decoration: none;
+color: white;
+padding: 12px 10px;
+}
+
+.menu-link .icon {
+margin-right: 10px;
+font-size: 1.2rem;
+}
+
+.menu-link .text {
+font-size: 1rem;
+}
+
+.logout-btn {
+background-color: #e74c3c;
+color: white;
+border: none;
+padding: 12px;
+cursor: pointer;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 5px;
+font-size: 1rem;
+margin-top: 20px;
+transition: background 0.2s;
+}
+
+.logout-btn:hover {
+background-color: #c0392b;
+}
+
+.main-content {
+flex: 1;
+padding: 40px;
+background-color: #f4f4f4;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  padding: 12px 10px;
+  margin: 15px 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background-color: #000000;
+  border-radius: 8px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* ensures content stays inside */
+  margin-left: 10px;
+  flex: 1; /* allows it to take remaining width */
+  gap: 5px;
+}
+
+.welcome-text {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* shortens long names with "..." */
+}
+
+.profile-email {
+  font-size: 12px;
+  color: #fffcfc;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* shortens long emails with "..." */
+}

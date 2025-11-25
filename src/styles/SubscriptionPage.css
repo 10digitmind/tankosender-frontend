@@ -1,0 +1,187 @@
+.subscription-page {
+max-width: 700px;
+margin: 30px auto;
+font-family: Arial, sans-serif;
+}
+
+.no-subscription, .subscription-card {
+border: 2px solid #ccc;
+padding: 20px;
+border-radius: 10px;
+text-align: center;
+margin-top: 20px;
+}
+
+.no-subscription h3 {
+margin-top: 10px;
+}
+
+.subscribe-btn, .upgrade-btn, .renew-btn, .cancel-btn {
+padding: 10px 20px;
+margin: 10px 5px;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+font-weight: bold;
+}
+
+.subscribe-btn {
+background-color: #007bff;
+color: white;
+}
+
+.upgrade-btn {
+background-color: #28a745;
+color: white;
+}
+
+.renew-btn {
+background-color: #ffc107;
+color: white;
+}
+
+.cancel-btn {
+background-color: #f44336;
+color: white;
+}
+
+.plan-header {
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 10px;
+}
+.subscribe-form {
+border: 2px solid #007bff;
+padding: 15px;
+margin-top: 15px;
+border-radius: 8px;
+text-align: left;
+}
+
+.subscribe-form label {
+display: block;
+margin-bottom: 10px;
+}
+
+.subscribe-form input {
+width: 100%;
+padding: 6px;
+margin-top: 4px;
+box-sizing: border-box;
+}
+
+.form-buttons {
+margin-top: 10px;
+display: flex;
+gap: 10px;
+}
+
+.form-buttons button {
+padding: 8px 15px;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+font-weight: bold;
+}
+
+.form-buttons button:first-child {
+background-color: #ccc;
+}
+
+.form-buttons button:last-child {
+background-color: #28a745;
+color: white;
+}
+/* Overlay */
+.subscription-modal {
+  position: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal box */
+.subscription-modal .modal-content {
+  background-color: #fff;
+  padding: 30px 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  position: relative;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Modal heading */
+.subscription-modal .modal-content h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Modal paragraph */
+.subscription-modal .modal-content p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Telegram link button */
+.subscription-modal .modal-content a {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #0088cc;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.subscription-modal .modal-content a:hover {
+  background-color: #006699;
+}
+
+/* Close button */
+.subscription-modal .modal-content button {
+  display: inline-block;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+  margin-left: 10px;
+}
+
+.subscription-modal .modal-content button:hover {
+  background-color: #d32f2f;
+}
+
+/* Optional: Responsive for small screens */
+@media (max-width: 480px) {
+  .subscription-modal .modal-content {
+    padding: 20px 15px;
+  }
+
+  .subscription-modal .modal-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .subscription-modal .modal-content p {
+    font-size: 0.95rem;
+  }
+}

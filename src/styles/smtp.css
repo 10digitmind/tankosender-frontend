@@ -1,0 +1,243 @@
+/* SMTPAccountPage.css */
+.smtp-page {
+max-width: 600px;
+margin: 20px auto;
+font-family: Arial, sans-serif;
+}
+
+.add-smtp-btn {
+padding: 10px 20px;
+margin: 10px 0;
+cursor: pointer;
+}
+
+.smtp-form {
+border: 2px solid #ccc;
+padding: 15px;
+border-radius: 8px;
+margin-top: 10px;
+}
+
+.smtp-form.success {
+border-color: green;
+}
+
+.smtp-form.error {
+border-color: red;
+}
+
+.smtp-form label {
+display: block;
+margin-bottom: 10px;
+}
+
+.smtp-form input[type="text"],
+.smtp-form input[type="number"],
+.smtp-form input[type="password"] {
+width: 100%;
+padding: 6px;
+margin-top: 4px;
+box-sizing: border-box;
+}
+
+.form-buttons {
+margin-top: 10px;
+display: flex;
+gap: 10px;
+}
+
+.active-smtp {
+border: 2px solid #09b42e;
+padding: 15px;
+border-radius: 8px;
+margin-top: 20px;
+}
+
+.active-buttons {
+margin-top: 10px;
+display: flex;
+gap: 10px;
+}
+
+.error-message {
+color: red;
+margin-top: 5px;
+}
+.smtp-form select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover */
+.smtp-form select:hover {
+  border-color: #999;
+}
+
+/* Focus */
+.smtp-form select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Optional: style the label spacing */
+.smtp-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.active-buttons button {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s ease-in-out;
+}
+
+/* Edit button */
+.active-buttons button:first-child {
+  background-color: #0d6efd;   /* blue */
+  color: white;
+}
+
+.active-buttons button:first-child:hover {
+  background-color: #0b5ed7;
+}
+
+/* Delete button */
+.active-buttons button:last-child {
+  background-color: #dc3545;   /* red */
+  color: white;
+}
+
+.active-buttons button:last-child:hover {
+  background-color: #bb2d3b;
+}
+
+/* spacing between buttons */
+.active-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.form-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* Base button style */
+.form-buttons button {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+/* Cancel button */
+.form-buttons button:first-child {
+  background-color: #6c757d; /* grey */
+  color: white;
+}
+
+.form-buttons button:first-child:hover {
+  background-color: #5c636a;
+}
+
+/* Connect button */
+.form-buttons button:last-child {
+  background-color: #198754; /* green */
+  color: white;
+}
+
+.form-buttons button:last-child:hover {
+  background-color: #157347;
+}
+.active-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.active-buttons button {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+/* Edit button */
+.active-buttons button:nth-child(1) {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.active-buttons button:nth-child(1):hover {
+  background-color: #0b5ed7;
+}
+
+/* Delete button */
+.active-buttons button:nth-child(2) {
+  background-color: #dc3545;
+  color: white;
+}
+
+.active-buttons button:nth-child(2):hover {
+  background-color: #bb2d3b;
+}
+
+/* Test SMTP button */
+.active-buttons button:nth-child(3) {
+  background-color: #6f42c1;
+  color: white;
+}
+
+.active-buttons button:nth-child(3):hover {
+  background-color: #5a34a1;
+}
+
+/* Test SMTP form box */
+.test-smtp-box {
+  margin-top: 15px;
+  padding: 15px;
+  border: 2px solid #000000;
+  border-radius: 8px;
+}
+
+.test-smtp-box input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.send-test-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #198754;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.send-test-btn:hover {
+  background-color: #157347;
+}
