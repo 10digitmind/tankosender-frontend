@@ -46,7 +46,6 @@ export const SignUpPage = () => {
     toast.error("Please input email and password");
     return;
   }
-  console.log(email,password)
 
   setLoading(true);
   setError(null);

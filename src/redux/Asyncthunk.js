@@ -25,6 +25,7 @@ export const createUser = createAsyncThunk(
       return res.data; // user + message
     } catch (error) {
       console.error("Axios error:", error.message);
+      console.log(error)
 
       const message =
         error.response?.data?.message || error.message || "Registration failed";
