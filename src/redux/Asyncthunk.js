@@ -12,6 +12,7 @@ export const createUser = createAsyncThunk(
   "auth/createUser",
   async ({ email, password }, thunkAPI) => {
     try {
+            console.log(API_URL)
       const res = await axios.post(`${API_URL}/register-user`, {
         email,
         password,
@@ -21,7 +22,7 @@ export const createUser = createAsyncThunk(
         "Registration successful. Please check your email to verify your account."
       );
 
-      console.log(API_URL)
+
       return res.data; // user + message
     } catch (error) {
       console.error("Axios error:", error.message);
