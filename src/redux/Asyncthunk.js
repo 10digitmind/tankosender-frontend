@@ -20,12 +20,13 @@ export const createUser = createAsyncThunk(
       toast.success(
         "Registration successful. Please check your email to verify your account."
       );
-
+console.log(API_URL)
     
       return res.data; // user + message
     } catch (error) {
       console.error("Axios error:", error.message);
       console.log(error)
+
 
       const message =
         error.response?.data?.message || error.message || "Registration failed";
