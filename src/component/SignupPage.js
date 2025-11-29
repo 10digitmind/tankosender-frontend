@@ -58,7 +58,7 @@ export const SignUpPage = () => {
     }, 10000); // 10 seconds
 
     const resultAction = await dispatch(createUser({ email, password, signal: controller.signal })).unwrap();
-console.log(resultAction)
+
     clearTimeout(timeout);
 
     if (resultAction?._id) {
