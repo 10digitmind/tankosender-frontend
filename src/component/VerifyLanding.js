@@ -40,7 +40,7 @@ const dispatch = useDispatch()
  const expiresAt = now + 24 * 60 *60 * 1000; 
         localStorage.setItem("expiresAt", expiresAt);
         // Optional: redirect after 3 seconds
-        setTimeout(() => navigate("/dashboard"), 3000);
+        setTimeout(() => navigate("/dashboard/smtp"), 3000);
       } catch (err) {
         const errMsg = err.response?.data?.message || "Verification failed.";
         setStatus("error");

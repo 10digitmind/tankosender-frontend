@@ -55,8 +55,8 @@ const createSmtpHandler = () => {
     !activeSmtp?.host ||
     !activeSmtp?.port ||
     !activeSmtp?.username ||
-    !activeSmtp?.password ||
-    activeSmtp?.secure === undefined || activeSmtp.secure === null
+    !activeSmtp?.password 
+    
   ) {
     toast.error('All feild is required')
     return
