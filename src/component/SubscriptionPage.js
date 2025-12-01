@@ -101,6 +101,18 @@ Proceed only if you have sent the payment.`,
     }
   };
 
+
+
+  const  copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText('0xf354d5816648B4EAcD3E2fDA319BDbe49A1b7c3F');
+      alert("wallet Copied!");
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
+
   return (
     <div className="subscription-page">
       <h2>Subscription Plan</h2>
@@ -151,6 +163,9 @@ Proceed only if you have sent the payment.`,
                 <button onClick={() => setShowSubscribeForm(false)}>Cancel</button>
                 <button onClick={handlePaymentSubmit} disabled={loading}>
                   {loading ? "Processing..." : "I Have Sent Coin"}
+                </button>
+                    <button onClick={copyToClipboard} >
+                Copy Admin Address 
                 </button>
               </div>
             </div>
