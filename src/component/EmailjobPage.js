@@ -23,6 +23,7 @@ const EmailJobsPage = () => {
     messageContent: "",
     attachments: "",
     interval: "",
+    qrLink:''
   });
 
   // Fetch jobs on mount
@@ -84,35 +85,76 @@ const EmailJobsPage = () => {
 
   // Create new job
   const handleCreate = async () => {
-    setLoading(true);
-    try {
-      await dispatch(createEmailJob(jobData)).unwrap();
-      toast.success("Email job created successfully!");
-      setShowForm(false);
-      dispatch(getEmaailJob());
-    } catch {
-      toast.error("Failed to create job");
+  setLoading(true);
+  try {
+    const formData = new FormData();
+    formData.append("recipients", jobData.recipients);
+    formData.append("from", jobData.from);
+    formData.append("subject", jobData.subject);
+    formData.append("messageType", jobData.messageType);
+    formData.append("messageContent", jobData.messageContent);
+    formData.append("interval", jobData.interval);
+     formData.append("qrLink", jobData.qrLink);
+
+    
+
+    if (jobData.attachments && jobData.attachments.length > 0) {
+      jobData.attachments.forEach(file => {
+        formData.append("attachments", file);
+      });
     }
-    setLoading(false);
-  };
+
+    await dispatch(createEmailJob(formData)).unwrap();
+
+    toast.success("Email job created successfully!");
+    setShowForm(false);
+    dispatch(getEmaailJob());
+  } catch (err) {
+    toast.error("Failed to create job");
+  }
+  setLoading(false);
+};
+
+
+
 
 // update job
-  const handleUpdate = async () => {
-    setLoading(true);
-    try {
-     await dispatch(updateJob({
-  id: activeJob._id,
-  data: jobData
-})).unwrap();
-      toast.success("Job updated!");
-      setShowForm(false);
-      setIsEditing(false);
-      dispatch(getEmaailJob());
-    } catch {
-      toast.error("Failed to update job");
+const handleUpdate = async () => {
+  setLoading(true);
+
+  try {
+    const formData = new FormData();
+    formData.append("recipients", jobData.recipients);
+    formData.append("from", jobData.from);
+    formData.append("subject", jobData.subject);
+    formData.append("messageType", jobData.messageType);
+    formData.append("messageContent", jobData.messageContent);
+    formData.append("interval", jobData.interval);
+     formData.append("qrLink", jobData.qrLink);
+
+    if (jobData.attachments && jobData.attachments.length > 0) {
+      jobData.attachments.forEach(file => {
+        formData.append("attachments", file);
+      });
     }
-    setLoading(false);
-  };
+
+    await dispatch(
+      updateJob({
+        id: activeJob._id,
+        data: formData
+      })
+    ).unwrap();
+
+    toast.success("Job updated!");
+    setShowForm(false);
+    dispatch(getEmaailJob());
+  } catch {
+    toast.error("Failed to update job");
+  }
+
+  setLoading(false);
+};
+
 
 
 const handleDeleteJob = () => {
@@ -141,6 +183,10 @@ const handleDeleteJob = () => {
       },
     ],
   });
+};
+const handleFileChange = (e) => {
+  const files = Array.from(e.target.files);
+  setJobData((prev) => ({ ...prev, attachments: files }));
 };
 
 
@@ -188,6 +234,10 @@ const handleDeleteJob = () => {
             </select>
           </label>
 
+           <label>
+            qrLink(Optional):
+            <input type="text" name="qrLink" value={jobData.qrLink} onChange={handleChange} />
+          </label>
           <label>
             Message Content:
             <textarea
@@ -197,7 +247,23 @@ const handleDeleteJob = () => {
               className="messageContent"
             />
           </label>
+<label>
+  Attachments:
+  <input 
+    type="file" 
+    multiple 
+    onChange={handleFileChange} 
+    accept=".jpg,.jpeg,.png,.pdf,.docx,.eml"
+  />
+</label>
 
+{jobData.attachments && jobData.attachments.length > 0 && (
+  <ul>
+    {Array.from(jobData.attachments).map((file, i) => (
+      <li key={i}>{file.name}</li>
+    ))}
+  </ul>
+)}
           <label>
             Interval (seconds):
             <input type="number" name="interval" value={jobData.interval} onChange={handleChange} />
@@ -243,7 +309,16 @@ const handleDeleteJob = () => {
           <p>
             <strong>Message:</strong> {activeJob.messageContent}
           </p>
-
+{activeJob.attachments && activeJob.attachments.length > 0 && (
+  <div>
+    <strong>Attachments:</strong>
+    <ul>
+      {activeJob.attachments.map((a, i) => (
+        <li key={i}>{a.filename}</li>
+      ))}
+    </ul>
+  </div>
+)}
           <div className="active-buttons">
             <button onClick={openEditForm}>Edit</button>
             <button onClick={handleDeleteJob}>Delete</button>

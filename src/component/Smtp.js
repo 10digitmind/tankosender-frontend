@@ -100,8 +100,7 @@ setLoading(true);
     setActiveSmtp(updatedSmtp);
 
     // Optional: Update Redux store if you store SMTP list globally
-   
-
+  
     setStatus("success");
     toast.success("SMTP connected successfully!");
   } catch (err) {
@@ -189,7 +188,7 @@ return (
         }`}
       >
         <label>
-          SMTP Name:
+          SMTP Name:(optional)
           <input
             type="text"
             name="label"

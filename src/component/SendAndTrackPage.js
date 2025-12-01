@@ -6,7 +6,7 @@ import { FaPlay, FaCheckCircle, FaTimesCircle, FaEnvelope } from "react-icons/fa
 import { StartJob, getEmaailJob } from "../redux/Asyncthunk";
 import "../styles/sendAndTrack.css";
 import { useNavigate } from "react-router-dom";
-
+import { QRCodeSVG } from "qrcode.react";
 const Api =process.env.REACT_APP_API_URL 
 
 const SendAndTrackPage = () => {
@@ -217,6 +217,9 @@ setEmailList(prevList =>
           Start Sending
         </button>
       </div>
+
+
+<QRCodeSVG value="https://yourlink.com" size={200} />;
 
       {/* Progress Bar */}
       <div className="progress-bar-container">

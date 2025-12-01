@@ -189,42 +189,32 @@ export const deleteSmtp = createAsyncThunk(
   }
 );
 
-
 export const createEmailJob = createAsyncThunk(
   "smtp/createEmailJob",
-  async ({ recipients,
-    from,
-    subject,
-    messageType,
-    messageContent,
-    interval }, thunkAPI) => {
+  async (formData, thunkAPI) => {
     try {
       const token = localStorage.getItem("authToken");
 
       const res = await axios.post(
         `${API_URL}/create-job`,
-        { recipients,
-    from,
-    subject,
-    messageType,
-    messageContent,
-    interval },
+        formData, // <-- SEND FORM DATA DIRECTLY
         {
           headers: {
             Authorization: `Bearer ${token}`,
-          },
+            "Content-Type": "multipart/form-data",
+          }
         }
       );
-   
 
-      return res.data.smtp; // return newly created smtp
+      return res.data; 
     } catch (error) {
       return thunkAPI.rejectWithValue(
-        error.response?.data?.message || "Failed to create SMTP"
+        error.response?.data?.message || "Failed to create email job"
       );
     }
   }
 );
+
 
 
 export const getEmaailJob = createAsyncThunk(
@@ -275,7 +265,10 @@ export const updateJob = createAsyncThunk(
         `${API_URL}/edit-job/${id}`,
         data,
         {
-          headers: { Authorization: `Bearer ${token}` },
+         headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          }
         }
       );
 
