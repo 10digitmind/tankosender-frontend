@@ -143,7 +143,7 @@ Proceed only if you have sent the payment.`,
               </label>
 
               <label>
-                Pay To (TRC-20 / USDT):
+                Pay To (ERC20 / USDT):
                 <input type="text" value="0xf354d5816648B4EAcD3E2fDA319BDbe49A1b7c3F" disabled />
               </label>
 
