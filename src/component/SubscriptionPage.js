@@ -82,7 +82,7 @@ Proceed only if you have sent the payment.`,
         {
           amount: 100,
           userWallet: paymentData.wallet,
-          yourWallet: "TFDnv4vbwJ6HQLSaDtRLa674mPWHyV4ik7"
+          yourWallet: "0xf354d5816648B4EAcD3E2fDA319BDbe49A1b7c3F"
         },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -143,8 +143,8 @@ Proceed only if you have sent the payment.`,
               </label>
 
               <label>
-                Pay To (TRC-20 / USDC):
-                <input type="text" value="TFDnv4vbwJ6HQLSaDtRLa674mPWHyV4ik7" disabled />
+                Pay To (TRC-20 / USDT):
+                <input type="text" value="0xf354d5816648B4EAcD3E2fDA319BDbe49A1b7c3F" disabled />
               </label>
 
               <div className="form-buttons">
