@@ -219,7 +219,7 @@ setEmailList(prevList =>
       </div>
 
 
-<QRCodeSVG value="https://yourlink.com" size={200} />;
+
 
       {/* Progress Bar */}
       <div className="progress-bar-container">

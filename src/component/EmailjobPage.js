@@ -23,7 +23,8 @@ const EmailJobsPage = () => {
     messageContent: "",
     attachments: "",
     interval: "",
-    qrLink:''
+    qrLink:'',
+    fromName:" "
   });
 
   // Fetch jobs on mount
@@ -39,6 +40,22 @@ const EmailJobsPage = () => {
       setActiveJob(null);
     }
   }, [emailJob]);
+
+  useEffect(() => {
+  if (!activeJob) return;
+
+  setJobData({
+    recipients: activeJob.recipients?.join(",") || "",
+    from: activeJob.from || "",
+    fromName: activeJob.fromName || "",
+    subject: activeJob.subject || "",
+    messageType: activeJob.messageType || "text",
+    messageContent: activeJob.messageContent || "",
+    interval: activeJob.interval || "",
+    qrLink: activeJob.qrLink || "",
+    attachments: activeJob.attachments || []
+  });
+}, [activeJob]);
 
   // Handle input
   const handleChange = (e) => {
@@ -95,6 +112,7 @@ const EmailJobsPage = () => {
     formData.append("messageContent", jobData.messageContent);
     formData.append("interval", jobData.interval);
      formData.append("qrLink", jobData.qrLink);
+     formData.append("fromName", jobData.fromName);
 
     
 
@@ -131,6 +149,7 @@ const handleUpdate = async () => {
     formData.append("messageContent", jobData.messageContent);
     formData.append("interval", jobData.interval);
      formData.append("qrLink", jobData.qrLink);
+        formData.append("fromName", jobData.fromName);
 
     if (jobData.attachments && jobData.attachments.length > 0) {
       jobData.attachments.forEach(file => {
@@ -221,6 +240,12 @@ const handleFileChange = (e) => {
             <input type="text" name="from" value={jobData.from} onChange={handleChange} />
           </label>
 
+
+              <label>
+            From Name:
+            <input type="text" name="fromName" value={jobData.fromName} onChange={handleChange} />
+          </label>
+
           <label>
             Subject:
             <input type="text" name="subject" value={jobData.subject} onChange={handleChange} />
@@ -296,6 +321,14 @@ const handleFileChange = (e) => {
           </p>
           <p>
             <strong>From:</strong> {activeJob.from}
+          </p>
+
+             <p>
+            <strong>From name:</strong> {activeJob.fromName}
+          </p>
+
+            <p>
+            <strong>  qr  link:</strong> {activeJob.qrLink}
           </p>
           <p>
             <strong>Subject:</strong> {activeJob.subject}
