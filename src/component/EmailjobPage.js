@@ -26,21 +26,7 @@ const EmailJobsPage = () => {
     qrLink:'',
     fromName:" "
   });
-
-  // Fetch jobs on mount
-  useEffect(() => {
-    dispatch(getEmaailJob());
-  }, [dispatch]);
-
-  // Set active job when job list changes
-  useEffect(() => {
-    if (emailJob && emailJob.length > 0) {
-      setActiveJob(emailJob[0]);
-    } else {
-      setActiveJob(null);
-    }
-  }, [emailJob]);
-
+  
   useEffect(() => {
   if (!activeJob) return;
 
@@ -56,6 +42,21 @@ const EmailJobsPage = () => {
     attachments: activeJob.attachments || []
   });
 }, [activeJob]);
+  // Fetch jobs on mount
+  useEffect(() => {
+    dispatch(getEmaailJob());
+  }, [dispatch]);
+
+  // Set active job when job list changes
+  useEffect(() => {
+    if (emailJob && emailJob.length > 0) {
+      setActiveJob(emailJob[0]);
+    } else {
+      setActiveJob(null);
+    }
+  }, [emailJob]);
+
+
 
   // Handle input
   const handleChange = (e) => {
@@ -138,41 +139,41 @@ const EmailJobsPage = () => {
 
 // update job
 const handleUpdate = async () => {
-  setLoading(true);
+    setLoading(true);
+    try {
+      const formData = new FormData();
 
-  try {
-    const formData = new FormData();
-    formData.append("recipients", jobData.recipients);
-    formData.append("from", jobData.from);
-    formData.append("subject", jobData.subject);
-    formData.append("messageType", jobData.messageType);
-    formData.append("messageContent", jobData.messageContent);
-    formData.append("interval", jobData.interval);
-     formData.append("qrLink", jobData.qrLink);
-        formData.append("fromName", jobData.fromName);
+      // Only append fields if they are not empty (optional fields)
+      if (jobData.recipients) formData.append("recipients", jobData.recipients);
+      if (jobData.from) formData.append("from", jobData.from);
+      if (jobData.subject) formData.append("subject", jobData.subject);
+      if (jobData.messageType) formData.append("messageType", jobData.messageType);
+      if (jobData.messageContent) formData.append("messageContent", jobData.messageContent);
+      if (jobData.interval) formData.append("interval", jobData.interval);
 
-    if (jobData.attachments && jobData.attachments.length > 0) {
-      jobData.attachments.forEach(file => {
-        formData.append("attachments", file);
-      });
+      // Optional fields
+      if (jobData.fromName) formData.append("fromName", jobData.fromName);
+      if (jobData.qrLink) formData.append("qrLink", jobData.qrLink);
+
+      if (jobData.attachments && jobData.attachments.length > 0) {
+        jobData.attachments.forEach((file) => {
+          formData.append("attachments", file);
+        });
+      }
+
+      await dispatch(
+        updateJob({ id: activeJob._id, data: formData })
+      ).unwrap();
+
+      toast.success("Job updated!");
+      setShowForm(false);
+      dispatch(getEmaailJob());
+    } catch (err) {
+      toast.error("Failed to update job");
     }
+    setLoading(false);
+  };
 
-    await dispatch(
-      updateJob({
-        id: activeJob._id,
-        data: formData
-      })
-    ).unwrap();
-
-    toast.success("Job updated!");
-    setShowForm(false);
-    dispatch(getEmaailJob());
-  } catch {
-    toast.error("Failed to update job");
-  }
-
-  setLoading(false);
-};
 
 
 
@@ -320,15 +321,15 @@ const handleFileChange = (e) => {
             <strong>Recipients:</strong> {activeJob.recipients.join(", ")}
           </p>
           <p>
-            <strong>From:</strong> {activeJob.from}
+            <strong>From:</strong> {activeJob?.from}
           </p>
 
              <p>
-            <strong>From name:</strong> {activeJob.fromName}
+            <strong>From name:</strong> {activeJob?.fromName}
           </p>
 
             <p>
-            <strong>  qr  link:</strong> {activeJob.qrLink}
+            <strong>  qr  link:</strong> {activeJob?.qrLink}
           </p>
           <p>
             <strong>Subject:</strong> {activeJob.subject}
