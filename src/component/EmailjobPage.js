@@ -29,18 +29,18 @@ const EmailJobsPage = () => {
   
   useEffect(() => {
   if (!activeJob) return;
-
   setJobData({
     recipients: activeJob.recipients?.join(",") || "",
-    from: activeJob.from || "",
-    fromName: activeJob.fromName || "",
-    subject: activeJob.subject || "",
-    messageType: activeJob.messageType || "text",
-    messageContent: activeJob.messageContent || "",
-    interval: activeJob.interval || "",
-    qrLink: activeJob.qrLink || "",
-    attachments: activeJob.attachments || []
+    from: activeJob?.from || "",
+    fromName: activeJob?.fromName || "",
+    subject: activeJob?.subject || "",
+    messageType: activeJob?.messageType || "text",
+    messageContent: activeJob?.messageContent || "",
+    interval: activeJob?.interval || "",
+    qrLink: activeJob?.qrLink || "",
+    attachments: activeJob?.attachments || []
   });
+  console.log(activeJob)
 }, [activeJob]);
   // Fetch jobs on mount
   useEffect(() => {
@@ -90,15 +90,17 @@ const EmailJobsPage = () => {
     setIsEditing(true);
     setShowForm(true);
 
-    setJobData({
-      recipients: activeJob.recipients.join(", "),
-      from: activeJob.from,
-      subject: activeJob.subject,
-      messageType: activeJob.messageType,
-      messageContent: activeJob.messageContent,
-      attachments: activeJob.attachments || "",
-      interval: activeJob.interval,
-    });
+ setJobData({
+    recipients: activeJob.recipients?.join(",") || "",
+    from: activeJob?.from || "",
+    fromName: activeJob?.fromName || "",
+    subject: activeJob?.subject || "",
+    messageType: activeJob?.messageType || "text",
+    messageContent: activeJob?.messageContent || "",
+    interval: activeJob?.interval || "",
+    qrLink: activeJob?.qrLink || "",
+    attachments: activeJob?.attachments || []
+  });
   };
 
   // Create new job
