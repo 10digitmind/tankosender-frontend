@@ -237,23 +237,23 @@ const handleFileChange = (e) => {
 
           <label>
             From:
-            <input type="text" name="from" value={jobData.from} onChange={handleChange} />
+            <input type="text" name="from" value={jobData?.from} onChange={handleChange} />
           </label>
 
 
               <label>
             From Name:
-            <input type="text" name="fromName" value={jobData.fromName} onChange={handleChange} />
+            <input type="text" name="fromName" value={jobData?.fromName} onChange={handleChange} />
           </label>
 
           <label>
             Subject:
-            <input type="text" name="subject" value={jobData.subject} onChange={handleChange} />
+            <input type="text" name="subject" value={jobData?.subject} onChange={handleChange} />
           </label>
 
           <label>
             Message Type:
-            <select name="messageType" value={jobData.messageType} onChange={handleChange}>
+            <select name="messageType" value={jobData?.messageType} onChange={handleChange}>
               <option value="text">Text</option>
               <option value="html">HTML</option>
             </select>
@@ -261,13 +261,13 @@ const handleFileChange = (e) => {
 
            <label>
             qrLink(Optional):
-            <input type="text" name="qrLink" value={jobData.qrLink} onChange={handleChange} />
+            <input type="text" name="qrLink" value={jobData?.qrLink} onChange={handleChange} />
           </label>
           <label>
             Message Content:
             <textarea
               name="messageContent"
-              value={jobData.messageContent}
+              value={jobData?.messageContent}
               onChange={handleChange}
               className="messageContent"
             />
