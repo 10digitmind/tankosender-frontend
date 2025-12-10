@@ -31,11 +31,18 @@ useEffect(() => {
 useEffect(() => {
   if (smtp && smtp.length > 0) {
     setActiveSmtp(smtp[0]);
+   
   } else {
     setActiveSmtp(null);
   }
 
 }, [smtp]);
+
+
+
+useEffect(()=>{
+ console.log(smtp)
+},)
 
 const handleChange = (e) => {
 const { name, value, type, checked } = e.target;

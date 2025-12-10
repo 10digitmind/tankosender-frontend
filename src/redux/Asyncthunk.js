@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const API_URL =process.env.REACT_APP_API_URL 
 
-
+console.log('API_URL',API_URL)
 
 export const createUser = createAsyncThunk(
   "auth/createUser",
@@ -21,7 +21,6 @@ export const createUser = createAsyncThunk(
       toast.success(
         "Registration successful. Please check your email to verify your account."
       );
-
 
       return res.data; // user + message
     } catch (error) {
@@ -86,7 +85,7 @@ export const getSmtp = createAsyncThunk(
           Authorization: `Bearer ${token}`, // add token to header
         },
       });
-
+console.log('smto:',res)
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(

@@ -14,6 +14,8 @@ const EmailJobsPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [activeJob, setActiveJob] = useState(null);
+const [deletedAttachments, setDeletedAttachments] = useState([]);
+
 
   const [jobData, setJobData] = useState({
     recipients: "",
@@ -40,7 +42,7 @@ const EmailJobsPage = () => {
     qrLink: activeJob?.qrLink || "",
     attachments: activeJob?.attachments || []
   });
-  console.log(activeJob)
+  console.log( 'active',activeJob)
 }, [activeJob]);
   // Fetch jobs on mount
   useEffect(() => {
@@ -57,7 +59,9 @@ const EmailJobsPage = () => {
   }, [emailJob]);
 
 
-
+useEffect(() => {
+   console.log(emailJob)
+  }, [emailJob]);
   // Handle input
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -156,12 +160,20 @@ const handleUpdate = async () => {
       // Optional fields
       if (jobData.fromName) formData.append("fromName", jobData.fromName);
       if (jobData.qrLink) formData.append("qrLink", jobData.qrLink);
+      
+if (jobData.attachments && jobData.attachments.length > 0) {
+  jobData.attachments.forEach(file => {
+    // Only append new File objects (from input), not existing attachments
+    if (file instanceof File) {
+      formData.append("attachments", file);
+    }
+  });
+}
 
-      if (jobData.attachments && jobData.attachments.length > 0) {
-        jobData.attachments.forEach((file) => {
-          formData.append("attachments", file);
-        });
-      }
+if (deletedAttachments.length > 0) {
+  deletedAttachments.forEach(filename => formData.append("deleteAttachments", filename));
+}
+
 
       await dispatch(
         updateJob({ id: activeJob._id, data: formData })
@@ -281,17 +293,34 @@ const handleFileChange = (e) => {
     type="file" 
     multiple 
     onChange={handleFileChange} 
-    accept=".jpg,.jpeg,.png,.pdf,.docx,.eml"
+    accept=".jpg,.jpeg,.png,.pdf,.docx,.eml,.html"
   />
 </label>
 
-{jobData.attachments && jobData.attachments.length > 0 && (
+{jobData?.attachments && jobData?.attachments.length > 0 && (
   <ul>
-    {Array.from(jobData.attachments).map((file, i) => (
-      <li key={i}>{file.name}</li>
+    {Array.from(jobData?.attachments).map((file, i) => (
+      <li key={i} style={{color:'black'}}>
+        {file.filename}
+        {isEditing && (
+          <button
+            type="button"
+            onClick={() => {
+              setDeletedAttachments(prev => [...prev, file.filename]);
+              setJobData(prev => ({
+                ...prev,
+                attachments: prev.attachments.filter(a => a.filename !== file.filename)
+              }));
+            }}
+          >
+            Remove
+          </button>
+        )}
+      </li>
     ))}
   </ul>
 )}
+
           <label>
             Interval (seconds):
             <input type="number" name="interval" value={jobData.interval} onChange={handleChange} />
@@ -345,7 +374,7 @@ const handleFileChange = (e) => {
           <p>
             <strong>Message:</strong> {activeJob.messageContent}
           </p>
-{activeJob.attachments && activeJob.attachments.length > 0 && (
+{activeJob?.attachments && activeJob?.attachments.length > 0 && (
   <div>
     <strong>Attachments:</strong>
     <ul>
