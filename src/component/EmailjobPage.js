@@ -30,7 +30,8 @@ const EmailJobsPage = () => {
     sendAs: "inline",
     attachments: [],
     interval: "",
-    qrLink: ""
+    qrLink: "",
+    userFileName:''
   });
 
   // -------------------------
@@ -50,7 +51,8 @@ const EmailJobsPage = () => {
       sendAs: activeJob.sendAs || "inline",
       attachments: activeJob.attachments || [],
       interval: activeJob.interval || "",
-      qrLink: activeJob.qrLink || ""
+      qrLink: activeJob.qrLink || "",
+      userFileName:activeJob.userFileName || ""
     });
   }, [activeJob]);
 
@@ -89,7 +91,6 @@ const handleChange = (e) => {
   }
 };
 
-
   // -------------------------
   // Reset form
   // -------------------------
@@ -106,7 +107,8 @@ const handleChange = (e) => {
       sendAs: "inline",
       attachments: [],
       interval: "",
-      qrLink: ""
+      qrLink: "",
+      userFileName:""
     });
     setDeletedAttachments([]);
   };
@@ -140,11 +142,12 @@ const handleChange = (e) => {
         if (value) formData.append(key, value);
       });
 
+      
       // Append new attachments
       jobData.attachments.forEach(file => {
         if (file instanceof File) formData.append("attachments", file);
       });
-
+console.log(formData)
       await dispatch(createEmailJob(formData)).unwrap();
       toast.success("Email job created successfully!");
       setShowForm(false);
@@ -175,6 +178,12 @@ const handleChange = (e) => {
 
       // Deleted files
       deletedAttachments.forEach(filename => formData.append("deleteAttachments", filename));
+
+
+ console.log("Submitting FormData:");
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
 
       await dispatch(updateJob({ id: activeJob._id, data: formData })).unwrap();
       toast.success("Job updated successfully!");
@@ -258,7 +267,7 @@ const handleChange = (e) => {
 
 {removeHtmlAttachment && (
   <label>
-    HTML / Attachment:
+    HTML / Attachment (code for attachment):
     <textarea
       style={{resize:'none', height:'400px'}}
       name="htmlAttachment"
@@ -270,9 +279,21 @@ const handleChange = (e) => {
 )}
 
 
+ <label>
+   Name of your attachment
+    <input
+      style={{resize:'none'}}
+      name="userFileName"
+      value={jobData?.userFileName}
+      onChange={handleChange}
+      placeholder="Name of your attachment "
+      type="text"
+    />
+  </label>
+
           <label>Send HTML As:
             <select name="sendAs" value={jobData.sendAs} onChange={handleChange}>
-             {inline? <option value="inline">Inline in email</option>:'' }
+              <option value="inline">Inline in email</option>
               {removeHtmlAttachment?<option value="pdf">PDF attachment</option>:''}
              {removeHtmlAttachment? <option value="eml">EML attachment</option>:''}
                {removeHtmlAttachment?<option value="htmlFile">HTML file attachment</option>:''}
@@ -330,6 +351,7 @@ const handleChange = (e) => {
           <p><strong>Interval:</strong> {activeJob.interval} seconds</p>
           <p><strong>Message Body:</strong> {activeJob.messageBody}</p>
           <p><strong>HTML Attachment:</strong> {activeJob?.htmlAttachment}</p>
+             <p><strong> Attachment name:</strong> {activeJob?.userFileName}</p>
 
           {activeJob.attachments.length > 0 && (
             <div>
